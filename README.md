@@ -1,5 +1,3 @@
-# KAYAK homework
-
 **Goal:** Create a simple web application that displays information about various
 airlines.
 
