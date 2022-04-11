@@ -1,0 +1,313 @@
+/* 
+==============
+Variables
+==============
+*/
+:root {
+  --clr-background-grey: #f9fafb;
+  --clr-background-white: #fff;
+  --clr-title: #000000;
+  --clr-text-primary: #192024;
+  --clr-text-secondary: #5a6872;
+  --clr-kayak: #ff6a06;
+  --card-radius: 8px;
+  --card-shadow: 0 -1px 4px 0 rgba(25, 32, 36, 0.04),
+    0 3px 6px 0 rgba(25, 32, 36, 0.16);
+  --cards-gap-spacing: 16px;
+  --transition: all 0.3s linear;
+}
+/* 
+==============
+Global styles
+==============
+*/
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "HelveticaNeue", sans-serif; /* note: Helvetica Neue is licensed for commercial use*/
+  color: var(--clr-text-primary);
+  background-color: var(--clr-background-grey);
+  min-width: 320px;
+}
+h1 {
+  margin: 67px 0 73px 0;
+  font-size: 44px;
+  font-weight: 900;
+  color: var(--clr-title);
+}
+h3 {
+  font-size: 16px;
+  font-weight: bold;
+}
+a {
+  text-decoration: none;
+}
+main {
+  padding: 0 10px;
+}
+header {
+  background-color: var(--clr-background-white);
+  border-bottom: 1px solid #dde5eb;
+}
+@media screen and (min-width: 600px) {
+  main {
+    padding: 0 94px;
+  }
+}
+/* 
+==============
+Header Section
+==============
+*/
+.logo img {
+  margin: 19px 0 19px 16px;
+}
+
+/* 
+==========================
+Airlines Section - Filter 
+==========================
+*/
+.filter-alliances__title {
+  margin-bottom: 23px;
+}
+.filter-alliances__container {
+  margin-bottom: 56px;
+}
+.filter-alliances__item {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 24px;
+}
+.filter-alliances__item input {
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+}
+/* 
+===============================
+Airlines Section - Airline list
+===============================
+*/
+.numAirlines {
+  font-size: 15px;
+  color: var(--clr-text-secondary);
+}
+.airlines-list {
+  width: 100%;
+  height: 100%;
+  margin-bottom: 56px;
+}
+@media screen and (min-width: 804px) {
+  .airlines-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: var(--cards-gap-spacing);
+  }
+  .airline-card {
+    margin-bottom: 0 !important;
+  }
+}
+@media screen and (min-width: 1120px) {
+  .airlines-list {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+@media screen and (min-width: 1436px) {
+  .airlines-list {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+/* 
+===============================
+Airlines Section - Airline Card
+===============================
+*/
+.airline-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 5/4;
+  min-width: 300px;
+  min-height: 240px;
+  padding: 0 40px;
+  background-color: var(--clr-background-white);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  border: 0 rgba(0, 0, 0, 0);
+  transition: var(--transition);
+  margin-bottom: var(--cards-gap-spacing);
+}
+.show-card-code {
+  display: none;
+}
+.airline-card:hover .show-card-code {
+  display: inline-block;
+}
+.airline-card:hover {
+  border: 1px solid rgba(0, 0, 0, 1);
+}
+.airline-card:hover .airline-card__details {
+  display: block;
+  animation: movetext 0.3s ease-in-out;
+}
+@keyframes movetext {
+  0% {
+    display: none;
+    opacity: 0;
+  }
+  1% {
+    display: block;
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.airline-card__content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  font-size: 14px;
+}
+.airline-card__content img {
+  width: 32px;
+  height: auto;
+  /* specs has height 32px, using auto to avoid image stretch*/
+}
+
+.airline-card__info h3 {
+  line-height: 1.3rem;
+}
+.airline-card__details {
+  display: none;
+  line-height: 1.3rem;
+}
+.airline-card__details a {
+  color: var(--clr-text-secondary);
+  transition: var(--transition);
+}
+.airline-card__details a:hover {
+  color: var(--clr-kayak);
+}
+
+/* 
+====================
+Spinner for Loading
+====================
+*/
+.loader-container {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loader {
+  color: var(--clr-kayak);
+  font-size: 40px;
+  text-indent: -9999em;
+  overflow: hidden;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  margin: 72px auto;
+  position: relative;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+  animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+}
+@-webkit-keyframes load6 {
+  0% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  5%,
+  95% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  10%,
+  59% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em,
+      -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em,
+      -0.297em -0.775em 0 -0.477em;
+  }
+  20% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em,
+      -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em,
+      -0.749em -0.34em 0 -0.477em;
+  }
+  38% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em,
+      -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em,
+      -0.82em -0.09em 0 -0.477em;
+  }
+  100% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+}
+@keyframes load6 {
+  0% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  5%,
+  95% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  10%,
+  59% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em,
+      -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em,
+      -0.297em -0.775em 0 -0.477em;
+  }
+  20% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em,
+      -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em,
+      -0.749em -0.34em 0 -0.477em;
+  }
+  38% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em,
+      -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em,
+      -0.82em -0.09em 0 -0.477em;
+  }
+  100% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+}
+@-webkit-keyframes round {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes round {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
